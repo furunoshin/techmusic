@@ -20,11 +20,7 @@ class MicropostsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
   
-  def likings
-    @user = User.find(params[:id])
-    @likings = @user.likings.page(params[:page])
-    counts(@user)
-  end
+
 
 
   private
