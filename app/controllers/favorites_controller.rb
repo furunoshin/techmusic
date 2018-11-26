@@ -1,15 +1,15 @@
 class FavoritesController < ApplicationController
   def create
-    micropost = Micropost.find(params[:micropost_id])
-    current_user.like(micropost)
+    post = Post.find(params[:post_id])
+    current_user.like(post)
     flash[:success] = 'いいねしました。'
-    redirect_to("/users/#{micropost.user.id}")
+    redirect_to("/users/#{post.user.id}")
   end
 
   def destroy
-    micropost = Micropost.find(params[:micropost_id])
-    current_user.unlike(micropost)
+    post = Post.find(params[:post_id])
+    current_user.unlike(post)
     flash[:success] = 'いいねを解除しました。'
-    redirect_to("/users/#{micropost.user.id}")
+    redirect_to("/users/#{post.user.id}")
   end
 end
