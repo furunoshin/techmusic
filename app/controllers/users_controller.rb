@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:show, :user, :edit, :update, :followings, :followers, :likes]
+  before_action :require_user_logged_in, only: [:show, :user, :edit, :update, :destroy, :followings, :followers, :likes]
 
   def index
     @users = User.all.page(params[:page])
@@ -40,6 +40,12 @@ class UsersController < ApplicationController
       flash.now[:danger] = 'ユーザー情報の更新に失敗しました。'
       redirect_to user_path(@user.id)
     end
+  end
+  
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "アカウントを削除しました"
+    redirect_to root_url
   end
 
   def followings

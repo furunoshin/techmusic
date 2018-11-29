@@ -8,6 +8,7 @@ class Post < ApplicationRecord
   
   has_many :users
   has_many :favorites, dependent: :destroy
+  has_many :comments, dependent: :destroy
   
   def self.search(search)
     if search
