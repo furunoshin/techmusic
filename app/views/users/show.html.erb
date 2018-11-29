@@ -9,12 +9,25 @@
       </div>
     </div>
     <%= render 'relationships/follow_button', user: @user %>
+    
+    <div class="profile">
+      <%= @user.profile %>
+    </div>
+    <div class="site_url">
+      <%= @user.site_url %>
+    </div>
+    <div class="profile_edit">
+      <% if current_user == @user %>
+        <%= link_to "プロフィール編集", edit_user_path(@user.id), class: 'btn btn-primary	 btn-xs'%>
+      <% end %>
+    </div>
+    
   </aside>
   <div class="col-xs-8">
     <ul class="nav nav-tabs nav-justified">
-      <li class="<%= 'active' if current_page?(user_path(@user)) %>"><%= link_to user_path(@user) do %>posts <span class="badge"><%= @count_posts %></span><% end %></li>
-      <li class="<%= 'active' if current_page?(followings_user_path(@user)) %>"><%= link_to followings_user_path(@user) do %>Followings <span class="badge"><%= @count_followings %></span><% end %></li>
-      <li class="<%= 'active' if current_page?(followers_user_path(@user)) %>"><%= link_to followers_user_path(@user) do %>Followers <span class="badge"><%= @count_followers %></span><% end %></li>
+      <li class="<%= 'active' if current_page?(user_path(@user)) %>"><%= link_to user_path(@user) do %>投稿した記事 <span class="badge"><%= @count_posts %></span><% end %></li>
+      <li class="<%= 'active' if current_page?(followings_user_path(@user)) %>"><%= link_to followings_user_path(@user) do %>フォロー中 <span class="badge"><%= @count_followings %></span><% end %></li>
+      <li class="<%= 'active' if current_page?(followers_user_path(@user)) %>"><%= link_to followers_user_path(@user) do %>フォロワー <span class="badge"><%= @count_followers %></span><% end %></li>
       <li class="<%= 'active' if current_page?(likes_user_path(@user)) %>"><%= link_to likes_user_path(@user) do %>お気に入り <span class="badge"><%= @count_likes %></span><% end %></li>
     </ul>
     <%= render 'posts/posts', posts: @posts %>

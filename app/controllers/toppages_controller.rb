@@ -1,8 +1,10 @@
 class ToppagesController < ApplicationController
   def index
-    if logged_in?
-      @post = current_user.posts.build
-      @posts = current_user.feed_posts.order('created_at DESC').page(params[:page])
+    @users = User.all
+    @posts = Post.all
+    
+    unless logged_in?
+      @user = User.new
     end
   end
 end

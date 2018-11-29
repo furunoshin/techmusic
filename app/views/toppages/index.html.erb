@@ -1,22 +1,41 @@
 <% if logged_in? %>
-  <div class="row">
-    <aside class="col-md-4">
-      <%= form_for(@post) do |f| %>
-        <div class="form-group">
-          <%= f.text_area :content, class: 'form-control', rows: 5 %>
-        </div>
-        <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
-      <% end %>
-    </aside>
-    <div class="col-xs-8">
-      <%= render 'posts/posts', posts: @posts %>
-    </div>
-  </div>
+  <%= render 'toppages/top', posts: @posts, users: @users %>
 <% else %>
-  <div class="center jumbotron">
-    <div class="text-center">
-      <h1>Welcome to the TechMusic</h1>
-      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+
+  <div class="row">
+    <div class="col-sm-5">
+      <img src="/images/Logic.jpeg"　width="300" height="300" alt="Logic"　class="img-responsive">
+    </div>
+
+    <div class="col-sm-offset-2 col-sm-5">
+      
+      <%= form_for(@user) do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
+  
+        <div class="form-group">
+          <%= f.label :name, 'ユーザー名' %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+  
+        <div class="form-group">
+          <%= f.label :email, 'メールアドレス' %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+  
+        <div class="form-group">
+          <%= f.label :password, 'パスワード' %>
+          <%= f.password_field :password, class: 'form-control' %>
+        </div>
+  
+        <div class="form-group">
+          <%= f.label :password_confirmation, 'パスワード確認' %>
+          <%= f.password_field :password_confirmation, class: 'form-control' %>
+        </div>
+  
+        <%= f.submit '登録', class: 'btn btn-primary pull-right'%>
+      <% end %>
     </div>
   </div>
+  
+  <%= render 'toppages/top', posts: @posts, users: @users %>
 <% end %>

@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20181106125903) do
   end
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title"
+    t.string   "tag"
     t.string   "content"
     t.integer  "user_id"
     t.datetime "created_at", null: false
@@ -43,6 +45,8 @@ ActiveRecord::Schema.define(version: 20181106125903) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
+    t.string   "profile"
+    t.string   "site_url"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

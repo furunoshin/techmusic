@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :likes]
+  before_action :require_user_logged_in, only: [:show, :user, :edit, :update, :followings, :followers, :likes]
 
   def index
     @users = User.all.page(params[:page])
@@ -26,6 +26,21 @@ class UsersController < ApplicationController
       render :new
     end
   end
+  
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:success] = 'ユーザー情報が更新されました。'
+      redirect_to user_path(@user.id)
+    else
+      flash.now[:danger] = 'ユーザー情報の更新に失敗しました。'
+      redirect_to user_path(@user.id)
+    end
+  end
 
   def followings
     @user = User.find(params[:id])
@@ -48,6 +63,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile, :site_url )
   end
 end
