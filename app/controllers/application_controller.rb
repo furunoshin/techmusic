@@ -16,5 +16,11 @@ class ApplicationController < ActionController::Base
     @count_followings = user.followings.count
     @count_followers = user.followers.count
     @count_likes = user.likes.count
+    @count_like_comments = user.like_comments.count
+  end
+  
+  def favorite_counts(post)
+    # @count_iine = Favorite.where(post_id: post.id).count
+    @count_iine = post.favorites.count
   end
 end

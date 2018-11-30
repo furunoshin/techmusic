@@ -1,5 +1,5 @@
 <h2>検索結果</h2>
-<%= form_tag(search_path,:method => 'get') do %>
+<%= form_tag(search_posts_path,:method => 'get') do %>
   <%= text_field_tag :search, '',placeholder: "キーワードを入力" %>
   <%= submit_tag '検索', :name => nil %>
 <% end %>

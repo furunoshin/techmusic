@@ -23,31 +23,9 @@
   <% end %>
 </div>
 
-<!--コメント表示-->
-<div class="comment_index">
-  <h4>コメント</h4>
-  <% @post.comments.each do |comment| %>
-    <p><%= link_to "#{comment.user.name}" , @user %>: <%= comment.content %>
-    <% if current_user == comment.user %>
-      <span> <%= link_to "x" , [@post,comment] , method: :delete %></span></p>
-    <% end %>
-  <% end %>
-</div>
-
-
-<!--コメント入力-->
-<div class="comment-form">
-  <%= form_for([@post , @comment]) do |f| %>
-    <%= render 'layouts/error_messages', model: f.object %>
-    <div class="field">
-      <%= f.text_area :content, placeholder: "コメントを入力" %>
-    </div>
-    <%= f.submit "投稿", class: "btn btn-primary" %>
-
-  <% end %>
-
-</script>
-</div> 
+<% if logged_in? %>
+  <%= render 'comments/comment', post: @post %>
+<% end %>
 
 <div>
   <%= link_to '戻る', root_path, class: 'btn btn-link btn-xs'%>

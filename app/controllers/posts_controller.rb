@@ -11,6 +11,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comment = Comment.new
     @user = User.find_by(id: @post.user_id)
+    favorite_counts(@post)
   end
   
   

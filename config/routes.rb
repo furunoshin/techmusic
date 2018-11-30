@@ -11,16 +11,19 @@ Rails.application.routes.draw do
       get :followings
       get :followers
       get :likes
+      get :like_comments
     end
   end
-  
-  get 'search', to: 'posts#search'
+
   resources :posts do
+    collection do
+      get :search
+    end
     resources :comments, only: [:new, :show, :edit, :update, :create, :destroy]
   end
   resources :relationships, only: [:create, :destroy]
   resources :favorites, only: [:create, :destroy]
-  
+  resources :comment_favorites, only: [:create, :destroy]
   
     
 end
