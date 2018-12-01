@@ -51,6 +51,6 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  database: posts_production
-  username: posts
-  password: <%= ENV['POSTS_DATABASE_PASSWORD'] %>
+  database: techmusic_production
+  username: techmusic
+  password: <%= ENV['TECHMUSIC_DATABASE_PASSWORD'] %>
