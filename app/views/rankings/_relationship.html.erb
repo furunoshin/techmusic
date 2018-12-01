@@ -1,0 +1,20 @@
+<div class="col-sm-offset-2 col-sm-5">
+  <% if users.any? %>
+    <ul class="media-list">
+      <h3>ユーザーランキング</h3>
+      <% users.each_with_index do |user, index| %>
+        <li class="media">
+          <div class="media-left">
+            <img class="media-object img-rounded" src="<%= gravatar_url(user, { size: 50 }) %>" alt="">
+          </div>
+          <div class="media-body">
+            <div>
+              <p><%= index+1 %>位:<%= link_to user.name, user_path(user) %></p>
+            </div>
+            <p>フォロワー数：<%= user.followers.count %></p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

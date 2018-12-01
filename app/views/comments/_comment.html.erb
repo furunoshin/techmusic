@@ -1,8 +1,9 @@
 <!--コメント表示-->
 <div class="comment_index">
-  <h4>コメント</h4>
+  <h4>コメント:<%= @post.comments.count%>件</h4>
   <% post.comments.each do |comment| %>
-    <p><%= link_to "#{comment.user.name}" , @user %>: <%= comment.content %>
+    <p><%= link_to comment.user.name , @user %>: <%= comment.content %>
+    <span class="text-muted">posted at <%= l(@post.created_at, format: :long) %></span></p>
       <%= render 'comment_favorites/like_comment_button', user: @user, comment: comment %>    
     <% if current_user == comment.user %>
       <%= link_to "削除" , [@post, comment], method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>

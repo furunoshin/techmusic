@@ -8,8 +8,6 @@
         <img class="media-object img-rounded img-responsive" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
       </div>
     </div>
-    <%= render 'relationships/follow_button', user: @user %>
-    
     <div class="profile">
       <%= @user.profile %>
     </div>
@@ -21,6 +19,8 @@
         <%= link_to "プロフィール編集", edit_user_path(@user.id), class: 'btn btn-primary	 btn-xs'%>
       <% end %>
     </div>
+    <p>フォロワー数：<%= @user.followers.count %></p>
+    <%= render 'relationships/follow_button', user: @user %>
     
   </aside>
   <div class="col-xs-8">

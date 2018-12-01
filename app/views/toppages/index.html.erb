@@ -1,5 +1,6 @@
 <% if logged_in? %>
-  <%= render 'toppages/top', posts: @posts, users: @users %>
+　<%= render 'rankings/favorite', posts: @posts %>
+  <%= render 'rankings/relationship', users: @users %>
 <% else %>
 
   <div class="row">
@@ -36,6 +37,6 @@
       <% end %>
     </div>
   </div>
-  
-  <%= render 'toppages/top', posts: @posts, users: @users %>
+  <%= render 'rankings/favorite', posts: @posts %>
+  <%= render 'rankings/relationship', users: @users %>
 <% end %>

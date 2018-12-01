@@ -1,4 +1,6 @@
-<h2>検索結果</h2>
+<h2>検索結果:<%= @posts.count %>件</h2>
+
+
 <%= form_tag(search_posts_path,:method => 'get') do %>
   <%= text_field_tag :search, '',placeholder: "キーワードを入力" %>
   <%= submit_tag '検索', :name => nil %>
@@ -17,7 +19,7 @@
         <%= link_to post.user.name, user_path(post.user) %> <span class="text-muted">posted at <%= post.created_at %></span>
       </div>
       <div>
-        <p><%= link_to post.title, post_path(post.id) %></p>
+        <p><%= link_to post.title, post_path(post.id) %><span class="text-muted">  タグ:<%= link_to post.tag, post_path(post.id) %></span></p>
       </div>
     </div>
   </li>

@@ -5,14 +5,18 @@
         <h2 class="section-heading"><%= @post.title %></h2>
         <blockquote class="blockquote"><%= @post.tag %></blockquote>
         <p><%= @post.content %></p>
+        <span class="text-muted">posted at <%= l(@post.created_at, format: :long) %></span>
       </div>
     </div>
   </div>
 </article>
 
+<div>
 <% if logged_in? %>
   <%= render 'favorites/like_button', post: @post %>
 <% end %>
+いいね件数:<%= @post.favorites.count %>
+</div>
 
 <div>
   <% if current_user == @post.user %>
@@ -22,11 +26,10 @@
   </div>
   <% end %>
 </div>
-
 <% if logged_in? %>
   <%= render 'comments/comment', post: @post %>
 <% end %>
 
 <div>
-  <%= link_to '戻る', root_path, class: 'btn btn-link btn-xs'%>
+  <%= link_to '戻る', user_path(@post.user), class: 'btn btn-link btn-xs'%>
 </div>
