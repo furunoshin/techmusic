@@ -9,5 +9,4 @@
     <%= f.submit 'いいね', class: 'btn btn-default btn-xs' %>
   <% end %>
 <% end %>
-
-<p>いいね件数:<%= comment.comment_favorites.count %></p>
+<p>いいね <%= comment.comment_favorites.count %>件</p>

@@ -1,31 +1,70 @@
-<article>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <h2 class="section-heading"><%= @post.title %></h2>
-        <blockquote class="blockquote"><%= @post.tag %></blockquote>
-        <p><%= @post.content %></p>
-        <span class="text-muted">posted at <%= l(@post.created_at, format: :long) %></span>
+<!--テスト-->
+<div class="p-items_main">
+  <div class="it-Header">
+    <div class="u-flex-center-between mb-3">
+      <div class="it-Header_info">
+        <div class="it-Header_author">
+          <img class="media-object img-rounded" src="<%= gravatar_url(@post.user, { size: 30 }) %>" alt="アイコン">
+          <%= link_to @post.user.name, user_path(@post.user),  class: "it-Header_authorName" %>
+        </div>
+        <div class="it-Header_time">
+           <span class="text-muted"><%= l(@post.created_at, format: :long) %>に投稿</span>
+        </div>
+      </div>
+      <h1 class="it-Header_title" itemprop="headline"><%= @post.title %></h1>
+      <div class="it-Tags"><span>タグ: <%= @post.tag %></span></div>
+      <section class="it-MdContent" itemprop="articleBody">
+        <br>
+        <%= @post.content %>
+        <br>
+        <br>
+      </section>
+      <div>
+        <% if current_user == @post.user %>
+        <div>
+          <%= link_to "編集", edit_post_path(@post.id), class: 'btn btn-primary	 btn-xs'%>
+          <%= link_to "削除", @post, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+        </div>
+        <% end %>
+      </div>
+      <br>
+    </div>
+  </div>
+  
+  <div data-mount-target="articleFooterMenu">
+    <div data-reactroot class="it-Footer">
+      <div class="it-Footer_actions">
+        <div class="it-Footer_like">
+          <button class="LikeButton">
+            <span>
+              <% if logged_in? %>
+                <%= render 'favorites/like_button', post: @post %>
+              <% end %>
+              いいね <%= @post.favorites.count %>件
+            </span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</article>
-
-<div>
-<% if logged_in? %>
-  <%= render 'favorites/like_button', post: @post %>
-<% end %>
-いいね件数:<%= @post.favorites.count %>
-</div>
-
-<div>
-  <% if current_user == @post.user %>
-  <div>
-    <%= link_to "編集", edit_post_path(@post.id), class: 'btn btn-primary	 btn-xs'%>
-    <%= link_to "削除", @post, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+  
+  
+  <div class="ai-Container" itemprop="author">
+    <div class="ai-User">
+      @<%= link_to @post.user.name, user_path(@post.user) %>
+      <%= render 'relationships/follow_button', user: @user %>
+    </div>
   </div>
-  <% end %>
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 <% if logged_in? %>
   <%= render 'comments/comment', post: @post %>
 <% end %>
@@ -33,3 +72,4 @@
 <div>
   <%= link_to '戻る', user_path(@post.user), class: 'btn btn-link btn-xs'%>
 </div>
+

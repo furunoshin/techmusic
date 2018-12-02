@@ -14,13 +14,15 @@
           
           <!--検索機能-->
           
-          <li>
-            <%= form_tag(search_posts_path,:method => 'get') do %>
-              <%= text_field_tag :search, '',placeholder: "キーワードを入力"%>
-              <%= submit_tag '検索', :name => "nil" %>
+          <li class="navbar-form">
+            <div class="form-group">
+              <%= form_tag(search_posts_path,method: :get) do %>
+                  <%= text_field_tag :search, '',placeholder: "キーワードを入力"%>
+                  <%= submit_tag '検索', :name => "nil" , class: "btn btn-default"%>
+              </div>
             <% end %>
           </li>
-          
+            
         </ul>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
