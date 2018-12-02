@@ -12,11 +12,22 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @ranking_counts = Favorite.ranking
+    @posts = Post.find(@ranking_counts.keys)
+    @ranking_counts = Relationship.ranking
+    @users = User.find(@ranking_counts.keys)
+    
+    unless logged_in?
+      @user = User.new
+    end
   end
 
   def create
     @user = User.new(user_params)
+    @ranking_counts = Favorite.ranking
+    @posts = Post.find(@ranking_counts.keys)
+    @ranking_counts = Relationship.ranking
+    @users = User.find(@ranking_counts.keys)
 
     if @user.save
       flash[:success] = 'ユーザを登録しました。'
@@ -29,6 +40,9 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to user_path(@user.id)
+    end
   end
   
   def update

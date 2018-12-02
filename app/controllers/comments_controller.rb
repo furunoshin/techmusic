@@ -6,9 +6,11 @@ before_action :require_user_logged_in
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
+      flash[:success] = 'コメントを投稿しました。'
       redirect_to post_path(@post)
     else
-      render user_path(current_user.id)
+      flash[:danger] = 'コメントの投稿に失敗しました。'
+      redirect_to post_path(@post)
     end
   
   end
@@ -27,4 +29,3 @@ before_action :require_user_logged_in
 
 
 end
-
